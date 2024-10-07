@@ -14,6 +14,8 @@ jobs:
             pip install -r requirements.txt
             pipenv install
             pip install flask
+            pip install --upgrade pip setuptools
+            pip install markupsafe==1.0
   deploy:
     docker:
       - image: circleci/python:3.8
