@@ -11,6 +11,7 @@ jobs:
           command: |
             python -m venv venv
             . venv/bin/activate
+            pip install --upgrade pip
             pip install -r requirements.txt
             pipenv install
             pip install flask
@@ -58,6 +59,7 @@ jobs:
             ls
             cd src
             ls
+            pip install --upgrade pip
             pipenv install
             pip install flask
             pip install --upgrade setuptools
