@@ -1,0 +1,68 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+  deploy:
+    docker:
+      - image: circleci/python:3.8
+    # parameters:
+    #   s3-bucket-name:
+    #     type: string
+    #     default: test-api-circleci
+    #   stack-name:
+    #     type: string
+    #     default: testapistack
+      
+    steps:
+      - checkout
+      - run:
+          name: Install AWS CLI
+          command: pip install awscli
+      - run:
+          name: Install AWS SAM CLI
+          command: |
+            pip install aws-sam-cli
+      - run:
+          name: configure AWS credentials
+          command: |
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set default.region $AWS_DEFAULT_REGION
+      - run:
+          name: verifying working directory
+          command: |
+            pwd
+            ls -la
+      - run:
+          name: Run api.py
+          command: |
+            python -m venv venv
+            pwd
+            ls
+            . venv/bin/activate
+            pwd
+            ls
+            python api.py
+
+workflows:
+  version: 2
+  testdeploy:
+    jobs:
+      - deploy:
+          name: deploy-api
+          context: aws-credential-dev
+          filters:
+            branches:
+              only: main
+                                
+              
