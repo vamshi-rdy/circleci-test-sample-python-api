@@ -44,7 +44,7 @@ jobs:
             pwd
             ls -la
       - run:
-          name: Run api.py
+          name: Run main.py
           command: |
             python -m venv venv
             pwd
@@ -52,7 +52,9 @@ jobs:
             . venv/bin/activate
             pwd
             ls
-            python api.py
+            cd src
+            ls
+            python main.py
 
 workflows:
   version: 2
