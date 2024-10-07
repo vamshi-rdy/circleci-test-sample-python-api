@@ -58,6 +58,8 @@ jobs:
             ls
             pipenv install
             pip install flask
+            pip install --upgrade pip setuptools
+            pip install markupsafe==1.0
             python main.py
 
 workflows:
