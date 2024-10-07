@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/python:3.8
+      - image: circleci/python:3.6
     steps:
       - checkout
       - run:
@@ -14,11 +14,11 @@ jobs:
             pip install -r requirements.txt
             pipenv install
             pip install flask
-            pip install --upgrade pip setuptools
-            pip install markupsafe==1.0
+            pip install --upgrade setuptools
+            pip install markupsafe==1.1.1
   deploy:
     docker:
-      - image: circleci/python:3.8
+      - image: circleci/python:3.6
     # parameters:
     #   s3-bucket-name:
     #     type: string
@@ -60,8 +60,8 @@ jobs:
             ls
             pipenv install
             pip install flask
-            pip install --upgrade pip setuptools
-            pip install markupsafe==1.0
+            pip install --upgrade setuptools
+            pip install markupsafe==1.1.1
             python main.py
 
 workflows:
