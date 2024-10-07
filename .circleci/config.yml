@@ -13,7 +13,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
             pipenv install
-            # pip install flask
+            pip install flask
   deploy:
     docker:
       - image: circleci/python:3.8
@@ -56,6 +56,8 @@ jobs:
             ls
             cd src
             ls
+            pipenv install
+            pip install flask
             python main.py
 
 workflows:
